@@ -9,7 +9,12 @@ public class BlockManager : MonoBehaviour
     // Gap between blocks (in pixels)
     public int blockGap = 2;
     // Define a grid using numbers as index
+    [TextArea(10, 10)] // Creates a textbox area in Unity inspector
     public string gridBlocks = "000 222 000\n22222222222\n22 333 22\n333";
+
+    // How many blocks were created for this grid?
+    public int numberOfBlocks;
+    public int numberOfBlocksDestroyed;
 
     void Start()
     {
@@ -27,7 +32,7 @@ public class BlockManager : MonoBehaviour
         for (int y = 0; y < rows.Length; y++)
         {
             // Grab single row from array of rows
-            string row = rows[y];
+            string row = rows[y].Trim(); // .Trim removes white space (such as "\r")
             // Calculate the total width of the row
             float rowWidth = blockSize.x * row.Length + blockGap * (row.Length - 1);
             // Calculate spacing for block along Y ais (space each row)
@@ -41,6 +46,7 @@ public class BlockManager : MonoBehaviour
                 if (blockStr == " ")
                     continue;
 
+
                 // (rowWidth / 2) -- means offset to left side by half the width of row; centre adjusted
                 // (blockSize.x + blockGap) * x -- means offset new block by how many came before it
                 // (blockSize.x / 2) -- offset by half block width moved to the right
@@ -49,6 +55,7 @@ public class BlockManager : MonoBehaviour
                 // Create new block
                 Vector3 position = new Vector3(blockX, blockY, 0) + this.transform.position;
                 GameObject block = Instantiate(blockPrefab, position, Quaternion.identity, this.transform);
+                numberOfBlocks += 1;
                 // Convert string values 0, 1, 2, 3, or 4 into integer to get sprite from array of sprites and assign it
                 int spriteIndex = int.Parse(blockStr);
                 Sprite blockSprite = blockSprites[spriteIndex];

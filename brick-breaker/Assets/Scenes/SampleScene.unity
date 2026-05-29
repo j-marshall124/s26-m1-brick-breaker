@@ -301,6 +301,8 @@ MonoBehaviour:
     22 333 22
 
     434'
+  numberOfBlocks: 0
+  numberOfBlocksDestroyed: 0
 --- !u!4 &157306498
 Transform:
   m_ObjectHideFlags: 0
@@ -468,7 +470,7 @@ GameObject:
   - component: {fileID: 505212516}
   m_Layer: 0
   m_Name: Racket
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -525,8 +527,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.00000005041636, y: 0.42292315}
-  m_Size: {x: 24, y: 10}
+  m_Offset: {x: 0.000000027782221, y: 0.23305419}
+  m_Size: {x: 24.000004, y: 9.620265}
   m_Direction: 1
 --- !u!50 &505212515
 Rigidbody2D:
@@ -956,8 +958,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 9106c6f118ffa1b439e5749556c33b6e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1054,6 +1056,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de769f6afb38524aba5d59a542d494a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ball
+  rb2d: {fileID: 879119757}
+  launchSpeed: 100
+  blockManager: {fileID: 157306497}
 --- !u!1 &1307655292
 GameObject:
   m_ObjectHideFlags: 0
