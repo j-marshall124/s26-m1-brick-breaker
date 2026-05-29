@@ -286,6 +286,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c314171391fc09645be368dee9eb9c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlockManager
+  blockPrefab: {fileID: 7132703795422532803, guid: d5854a537a8e1754ab13e5d78cac80a1, type: 3}
+  blockSprites:
+  - {fileID: 21300000, guid: 69eeb0c75f7a0b74692bf18cd3b87752, type: 3}
+  - {fileID: 21300000, guid: f682aea0cddee5540a0cdbea91f41ab3, type: 3}
+  - {fileID: 21300000, guid: 10a29bc27bcb55f4b8a38a3833fa1d3d, type: 3}
+  - {fileID: 21300000, guid: 5a6bbeef85eb34f4389e34eef5759c6a, type: 3}
+  - {fileID: 21300000, guid: 4435d52fdc477614bb263242f9592e27, type: 3}
+  blockGap: 2
+  gridBlocks: '100 222 001
+
+    22222222222
+
+    22 333 22
+
+    434'
 --- !u!4 &157306498
 Transform:
   m_ObjectHideFlags: 0
