@@ -6,6 +6,9 @@ public class Ball : MonoBehaviour
     public Rigidbody2D rb2d;
     // Speed of ball at launch
     public float launchSpeed = 100; // in px
+    // Deflection angle off of the racket when at far edge
+    [Range (0f, 90f)]
+    public float maxDeflectAngle = 90;
     //
     public BlockManager blockManager;
 
@@ -39,7 +42,16 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player") == true)
         {
-            CollideWithRacket(collision.collider);
+            CollideWithRacketv2(collision.collider);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider2d)
+    {
+        // Reset ball if we go out of bounds
+        if (collider2d.gameObject.CompareTag("Out of Bounds") == true)
+        {
+            LaunchBall();
         }
     }
 
@@ -83,5 +95,31 @@ public class Ball : MonoBehaviour
                 rb2d.linearVelocity = direction * rb2d.linearVelocity.magnitude;
             }
         }
+    }
+
+    void CollideWithRacketv2(Collider2D racket)
+    {
+        // Subtract racket position from ball position
+        // This gives X relative to centre of racket
+        float relativeXofBall = this.transform.position.x - racket.transform.position.x;
+        // Total width of racket
+        float boundWidth = racket.bounds.size.x;
+        float boundsWidthHalf = boundWidth / 2;
+
+        // Get position of ball relative to bounds as a range from -1 to +1 (-100% to 0% to +100%)
+        float percentage = relativeXofBall / boundsWidthHalf;
+
+        // Create unit circle vector
+        // Get angle in degrees for how to bounce off racket
+        float angleDegrees = percentage * maxDeflectAngle;
+        // But sine and cosine needs radians!
+        float angleRadians = angleDegrees * Mathf.Deg2Rad;
+        // The create vector where angle 0 means up (0,1)
+        Vector2 deflectDirection = new Vector2(Mathf.Sin(angleRadians), Mathf.Cos(angleRadians));
+
+        // Apply vector to current movement vector
+        Vector2 direction = rb2d.linearVelocity.normalized + deflectDirection;
+        direction.Normalize();
+        rb2d.linearVelocity = direction * rb2d.linearVelocity.magnitude;
     }
 }
